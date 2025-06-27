@@ -107,7 +107,7 @@ class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
     }
     w = Container(
       alignment: Alignment.bottomRight,
-      margin: EdgeInsets.only(left: left, top: top),
+      margin: EdgeInsets.only(right: left, bottom: top),
       child: w,
     );
     return w;
