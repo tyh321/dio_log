@@ -48,8 +48,8 @@ class DraggableButtonWidget extends StatefulWidget {
 }
 
 class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
-  double left = 30;
-  double top = 100;
+  double right = 30;
+  double bottom = 100;
   late double screenWidth;
   late double screenHeight;
 
@@ -92,22 +92,22 @@ class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
     );
 
     ///计算偏移量限制
-    if (left < 1) {
-      left = 1;
+    if (right < 1) {
+      right = 1;
     }
-    if (left > screenWidth - widget.btnSize) {
-      left = screenWidth - widget.btnSize;
+    if (right > screenWidth - widget.btnSize) {
+      right = screenWidth - widget.btnSize;
     }
 
-    if (top < 1) {
-      top = 1;
+    if (bottom < 1) {
+      bottom = 1;
     }
-    if (top > screenHeight - widget.btnSize) {
-      top = screenHeight - widget.btnSize;
+    if (bottom > screenHeight - widget.btnSize) {
+      bottom = screenHeight - widget.btnSize;
     }
     w = Container(
       alignment: Alignment.bottomRight,
-      margin: EdgeInsets.only(right: left, bottom: top),
+      margin: EdgeInsets.only(right: right, bottom: bottom),
       child: w,
     );
     return w;
@@ -115,8 +115,8 @@ class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
 
   _dragUpdate(DragUpdateDetails detail) {
     Offset offset = detail.delta;
-    left = left + offset.dx;
-    top = top + offset.dy;
+    right = right - offset.dx;
+    bottom = bottom - offset.dy;
     setState(() {});
   }
 }
