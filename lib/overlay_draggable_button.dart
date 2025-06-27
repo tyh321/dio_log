@@ -9,14 +9,12 @@ import 'dio_log.dart';
 OverlayEntry? itemEntry;
 
 ///显示全局悬浮调试按钮
-showDebugBtn(BuildContext context, {Widget? button, Color? btnColor}) async {
+showDebugBtn(BuildContext context, {Color? btnColor}) async {
   ///widget第一次渲染完成
   try {
     await Future.delayed(Duration(milliseconds: 500));
     dismissDebugBtn();
-    itemEntry = OverlayEntry(
-        builder: (BuildContext context) =>
-            button ?? DraggableButtonWidget(btnColor: btnColor));
+    itemEntry = OverlayEntry(builder: (BuildContext context) => DraggableButtonWidget(btnColor: btnColor));
 
     ///显示悬浮menu
     Overlay.of(context).insert(itemEntry!);
@@ -37,14 +35,10 @@ bool debugBtnIsShow() {
 }
 
 class DraggableButtonWidget extends StatefulWidget {
-  final String title;
-  final Function? onTap;
   final double btnSize;
   final Color? btnColor;
 
   DraggableButtonWidget({
-    this.title = 'http log',
-    this.onTap,
     this.btnSize = 66,
     this.btnColor,
   });
@@ -79,26 +73,15 @@ class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
     };
     Widget w;
     Color primaryColor = widget.btnColor ?? Theme.of(context).primaryColor;
-    primaryColor = primaryColor.withOpacity(0.6);
+    primaryColor = primaryColor.withValues(alpha: .6);
     w = GestureDetector(
-      onTap: widget.onTap as void Function()? ?? tap,
+      onTap: tap,
       onPanUpdate: _dragUpdate,
       child: Container(
         width: widget.btnSize,
         height: widget.btnSize,
         color: primaryColor,
-        child: Center(
-          child: Text(
-            widget.title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.normal,
-              decoration: TextDecoration.none,
-            ),
-          ),
-        ),
+        child: Icon(Icons.bug_report_outlined, color: Colors.white, size: 30),
       ),
     );
 
@@ -123,7 +106,7 @@ class _DraggableButtonWidgetState extends State<DraggableButtonWidget> {
       top = screenHeight - widget.btnSize;
     }
     w = Container(
-      alignment: Alignment.topLeft,
+      alignment: Alignment.bottomRight,
       margin: EdgeInsets.only(left: left, top: top),
       child: w,
     );

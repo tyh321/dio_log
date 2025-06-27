@@ -76,7 +76,7 @@ Future<SearchModel?> showInputDialog(BuildContext context) async {
                     return Checkbox(
                       value: valueListenable.value,
                       onChanged: (v) {
-                        valueListenable.value = v??false;
+                        valueListenable.value = v ?? false;
                       },
                     );
                   },
@@ -107,7 +107,7 @@ Future<SearchModel?> showInputDialog(BuildContext context) async {
                 duType = 0;
               }
               if (duration.isNotEmpty) {
-                du = int.parse(duration) ?? 0;
+                du = int.tryParse(duration) ?? 0;
                 duType = 1;
               }
               var sm = SearchModel(
