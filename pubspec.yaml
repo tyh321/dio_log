@@ -21,7 +21,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - assets/
+    - images/
 topics:
   - dio
   - dio-log
